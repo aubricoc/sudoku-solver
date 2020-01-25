@@ -3,6 +3,7 @@ package cat.aubricoc.sudoku.service;
 import cat.aubricoc.sudoku.model.Cell;
 import cat.aubricoc.sudoku.model.Position;
 import cat.aubricoc.sudoku.model.Sudoku;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -61,9 +62,14 @@ public class SudokuService {
     }
 
     public List<Short> getPossibleValuesInCell(Sudoku sudoku, Cell cell) {
-        return IntStream.range(1, 10).mapToObj(value -> (short) value).filter(value -> {
+        if (sudoku == null || cell == null) {
+            return Collections.emptyList();
+        }
+        List<Short> possibleValues = IntStream.range(1, 10).mapToObj(value -> (short) value).filter(value -> {
             cell.setValue((short) value);
             return SudokuValidator.getInstance().validateSudoku(sudoku);
         }).collect(Collectors.toList());
+        cell.setValue(null);
+        return possibleValues;
     }
 }

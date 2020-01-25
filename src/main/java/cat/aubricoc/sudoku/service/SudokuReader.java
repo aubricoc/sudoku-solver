@@ -1,4 +1,4 @@
-package cat.aubricoc.sudoku;
+package cat.aubricoc.sudoku.service;
 
 import cat.aubricoc.sudoku.exception.InvalidSudokuException;
 import cat.aubricoc.sudoku.exception.SudokuFileNotFoundException;

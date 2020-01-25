@@ -4,11 +4,15 @@ import cat.aubricoc.sudoku.model.Cell;
 import cat.aubricoc.sudoku.model.Position;
 import cat.aubricoc.sudoku.model.Sudoku;
 import cat.aubricoc.sudoku.test.TestUtils;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SudokuServiceTest {
 
@@ -99,5 +103,27 @@ public class SudokuServiceTest {
 
     private Cell getCellByPosition(Sudoku sudoku, int x, int y) {
         return SudokuService.getInstance().getCellByPosition(sudoku, new Position((short) x, (short) y));
+    }
+
+    @Test
+    public void testGetPossibleValuesInCellOfNull() {
+        List<Short> result = SudokuService.getInstance().getPossibleValuesInCell(null, null);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testGetPossibleValuesInCellOfNullCell() {
+        Sudoku sudoku = TestUtils.getSudoku("sudoku1");
+        List<Short> result = SudokuService.getInstance().getPossibleValuesInCell(sudoku, null);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testGetPossibleValuesInCell() {
+        Sudoku sudoku = TestUtils.getSudoku("sudoku1");
+        Cell cell = sudoku.getRows().get(4).get(2);
+        List<Short> result = SudokuService.getInstance().getPossibleValuesInCell(sudoku, cell);
+        assertEquals(5, result.size());
+        assertTrue(Arrays.asList(1, 2, 4, 5, 6).stream().map(Integer::shortValue).allMatch(result::contains));
     }
 }

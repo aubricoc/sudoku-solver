@@ -1,4 +1,4 @@
-package cat.aubricoc.sudoku;
+package cat.aubricoc.sudoku.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import cat.aubricoc.sudoku.exception.InvalidSudokuException;
 import cat.aubricoc.sudoku.exception.SudokuFileNotFoundException;
 import cat.aubricoc.sudoku.model.Sudoku;
+import cat.aubricoc.sudoku.service.SudokuReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

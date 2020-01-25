@@ -5,18 +5,13 @@ import cat.aubricoc.sudoku.exception.RequiredFileException;
 
 public class ConfigurationParser {
 
-    private static final ConfigurationParser INSTANCE = new ConfigurationParser();
     private static final String MULTITHREADING_KEYWORD = "-p";
 
     private ConfigurationParser() {
-        super();
+        throw new UnsupportedOperationException();
     }
 
-    public static ConfigurationParser getInstance() {
-        return INSTANCE;
-    }
-
-    public Configuration parse(String[] args) {
+    public static Configuration parse(String[] args) {
         boolean multithreading = false;
         String file = null;
         if (args != null) {
@@ -38,7 +33,7 @@ public class ConfigurationParser {
         return new Configuration(multithreading, file);
     }
 
-    private boolean parseMultithreadingValue(String[] args, int iter) {
+    private static boolean parseMultithreadingValue(String[] args, int iter) {
         if (iter < args.length) {
             String arg = args[iter];
             if ("1".equals(arg)) {

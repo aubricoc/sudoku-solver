@@ -4,6 +4,7 @@ import cat.aubricoc.sudoku.config.Configuration;
 import cat.aubricoc.sudoku.config.ConfigurationParser;
 import cat.aubricoc.sudoku.exception.SudokuSolverException;
 import cat.aubricoc.sudoku.model.Sudoku;
+import cat.aubricoc.sudoku.service.SudokuReader;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ public class SudokuSolverRunner {
     public static void main(String[] args) {
         log("Sudoku Solver starts...");
         try {
-            Configuration config = ConfigurationParser.getInstance().parse(args);
+            Configuration config = ConfigurationParser.parse(args);
             log(config);
             Sudoku sudoku = SudokuReader.getInstance().read(config.getFile());
             log("Sudoku to solve:", sudoku);

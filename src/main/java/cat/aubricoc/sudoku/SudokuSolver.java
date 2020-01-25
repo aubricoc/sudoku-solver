@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 public class SudokuSolver {
 
     private static final SudokuSolver INSTANCE = new SudokuSolver();
+    private static final int MAX_THREADS = 100;
 
     private SudokuSolver() {
         super();
@@ -36,6 +37,9 @@ public class SudokuSolver {
     }
 
     private Sudoku tryNumbersInCell(Sudoku sudoku, Cell cell, boolean multithreading) {
+        if (Thread.activeCount() > MAX_THREADS) {
+            multithreading = false;
+        }
 
         List<Short> possibleValues = SudokuService.getInstance().getPossibleValuesInCell(sudoku, cell);
         if (possibleValues.isEmpty()) {
@@ -78,15 +82,15 @@ public class SudokuSolver {
                     return future.get();
                 } catch (InterruptedException | ExecutionException e) {
                     Thread.currentThread().interrupt();
-                    return null;
+                    throw new IllegalStateException("Failed multithreading mode", e);
                 }
             }).filter(Objects::nonNull).findFirst().orElse(null);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+            throw new IllegalStateException("Failed multithreading mode", e);
         } finally {
             executor.shutdown();
         }
-        return null;
     }
 
     private class TryNumberInCellCallable implements Callable<Sudoku> {

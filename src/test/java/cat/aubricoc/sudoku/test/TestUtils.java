@@ -1,7 +1,7 @@
 package cat.aubricoc.sudoku.test;
 
-import cat.aubricoc.sudoku.SudokuReader;
 import cat.aubricoc.sudoku.model.Sudoku;
+import cat.aubricoc.sudoku.service.SudokuReader;
 
 public class TestUtils {
 
