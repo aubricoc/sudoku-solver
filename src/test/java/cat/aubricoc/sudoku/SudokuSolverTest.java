@@ -1,23 +1,20 @@
 package cat.aubricoc.sudoku;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import cat.aubricoc.sudoku.exception.UnresolvableSudokuException;
 import cat.aubricoc.sudoku.model.Sudoku;
 import cat.aubricoc.sudoku.test.TestUtils;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class SudokuSolverTest {
 
     @Test
     public void testSolveNull() {
-        try {
-            SudokuSolver.getInstance().solve(null, false);
-        } catch (Throwable e) {
-            fail();
-        }
+        Sudoku solved = SudokuSolver.getInstance().solve(null, false);
+        assertNull(solved);
     }
 
     @Test

@@ -22,7 +22,7 @@ public class SudokuService {
         if (sudoku == null) {
             return null;
         }
-        return sudoku.getCells().stream().flatMap(List::stream).filter(cell -> cell.getValue() == null).findFirst()
+        return sudoku.getRows().stream().flatMap(List::stream).filter(cell -> cell.getValue() == null).findFirst()
                 .orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class SudokuService {
             return null;
         }
         return new Sudoku(
-                sudoku.getCells().stream().map(row -> row.stream().map(this::cloneCell).collect(Collectors.toList()))
+                sudoku.getRows().stream().map(row -> row.stream().map(this::cloneCell).collect(Collectors.toList()))
                         .collect(Collectors.toList()));
     }
 
@@ -46,7 +46,7 @@ public class SudokuService {
             return null;
         }
         if (isValidPosition(position)) {
-            return sudoku.getCells().get(position.getRow()).get(position.getCol());
+            return sudoku.getRows().get(position.getRow()).get(position.getCol());
         }
         return null;
     }

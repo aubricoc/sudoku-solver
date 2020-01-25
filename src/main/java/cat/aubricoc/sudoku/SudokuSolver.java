@@ -26,18 +26,30 @@ public class SudokuSolver {
         if (cell == null) {
             return sudoku;
         }
-        return tryNumbersInCell(sudoku, cell);
+        return tryNumbersInCell(sudoku, cell, multithreading);
     }
 
-    private Sudoku tryNumbersInCell(Sudoku sudoku, Cell cell) {
-        Sudoku cloned = SudokuService.getInstance().cloneSudoku(sudoku);
-        Cell cellCloned = SudokuService.getInstance().getCellByPosition(cloned, cell.getPosition());
+    private Sudoku tryNumbersInCell(Sudoku sudoku, Cell cell, boolean multithreading) {
         for (short numToTry = 1; numToTry < 10; numToTry++) {
-            cellCloned.setValue(numToTry);
-            if (SudokuValidator.getInstance().validateSudoku(cloned)) {
-                return cloned;
+            Sudoku solved = tryNumberInCell(sudoku, cell, numToTry, multithreading);
+            if (solved != null) {
+                return solved;
             }
         }
         throw new UnresolvableSudokuException();
+    }
+
+    private Sudoku tryNumberInCell(Sudoku sudoku, Cell cell, short numToTry, boolean multithreading) {
+        try {
+            Sudoku cloned = SudokuService.getInstance().cloneSudoku(sudoku);
+            Cell cellCloned = SudokuService.getInstance().getCellByPosition(cloned, cell.getPosition());
+            cellCloned.setValue(numToTry);
+            if (SudokuValidator.getInstance().validateSudoku(cloned)) {
+                return solve(cloned, multithreading);
+            }
+        } catch (UnresolvableSudokuException e) {
+            return null;
+        }
+        return null;
     }
 }
