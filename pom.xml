@@ -21,7 +21,7 @@
 					<finalName>sudoku</finalName>
 					<archive>
 						<manifest>
-							<mainClass>cat.aubricoc.sudoku.SudokuSolver</mainClass>
+							<mainClass>cat.aubricoc.sudoku.SudokuSolverRunner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

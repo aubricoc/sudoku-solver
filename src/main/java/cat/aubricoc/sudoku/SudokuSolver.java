@@ -1,18 +1,20 @@
 package cat.aubricoc.sudoku;
 
-import java.util.logging.Logger;
-
-import cat.aubricoc.sudoku.config.Configuration;
-import cat.aubricoc.sudoku.config.ConfigurationParser;
+import cat.aubricoc.sudoku.model.Sudoku;
 
 public class SudokuSolver {
 
-	private static final Logger LOG = Logger.getLogger(SudokuSolver.class.getName());
-	
-	public static void main(String[] args) {
-		LOG.info("Sudoku Solver");
-		Configuration config = ConfigurationParser.getInstance().parse(args);
-		LOG.info("Run multithreading: " + config.isMultithreading());
-		LOG.info(config.getFile());
-	}
+    private static final SudokuSolver INSTANCE = new SudokuSolver();
+
+    private SudokuSolver() {
+        super();
+    }
+
+    public static SudokuSolver getInstance() {
+        return INSTANCE;
+    }
+
+    public Sudoku solve(Sudoku sudoku, boolean multithreading) {
+        return null;
+    }
 }
