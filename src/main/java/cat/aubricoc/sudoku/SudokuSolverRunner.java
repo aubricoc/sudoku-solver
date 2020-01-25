@@ -4,6 +4,7 @@ import cat.aubricoc.sudoku.config.Configuration;
 import cat.aubricoc.sudoku.config.ConfigurationParser;
 import cat.aubricoc.sudoku.exception.SudokuSolverException;
 import cat.aubricoc.sudoku.model.Sudoku;
+import cat.aubricoc.sudoku.presentation.GoodLookingSudoku;
 import cat.aubricoc.sudoku.service.SudokuReader;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -21,9 +22,9 @@ public class SudokuSolverRunner {
             Configuration config = ConfigurationParser.parse(args);
             log(config);
             Sudoku sudoku = SudokuReader.getInstance().read(config.getFile());
-            log("Sudoku to solve:", sudoku);
+            log("Sudoku to solve:", new GoodLookingSudoku(sudoku));
             Sudoku solution = SudokuSolver.getInstance().solve(sudoku, config.isMultithreading());
-            log("Sudoku solved:", solution);
+            log("Sudoku solved:", new GoodLookingSudoku(solution));
             log("Sudoku Solver finished!");
         } catch (SudokuSolverException e) {
             LOG.severe("Failed Sudoku Solver: " + e.getMessage());
