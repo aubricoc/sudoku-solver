@@ -11,7 +11,7 @@ public class ConfigurationParser {
         throw new UnsupportedOperationException();
     }
 
-    public static Configuration parse(String[] args) {
+    public static Configuration parse(String... args) {
         boolean multithreading = false;
         String file = null;
         if (args != null) {

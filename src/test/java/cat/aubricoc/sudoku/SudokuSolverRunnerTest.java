@@ -28,7 +28,7 @@ public class SudokuSolverRunnerTest {
     private void testSudoku(String fileName, boolean multithreading) {
         String file = ClassLoader.getSystemResource(fileName).getPath();
         try {
-            SudokuSolverRunner.main(new String[] {file, "-p", multithreading ? "1" : "0"});
+            SudokuSolverRunner.main(file, "-p", multithreading ? "1" : "0");
         } catch (Throwable e) {
             fail();
         }

@@ -16,7 +16,7 @@ public class SudokuSolverRunner {
 
     private static final Logger LOG = Logger.getLogger(SudokuSolverRunner.class.getName());
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         log("Sudoku Solver starts...");
         try {
             Configuration config = ConfigurationParser.parse(args);

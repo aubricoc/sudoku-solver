@@ -13,47 +13,40 @@ public class ConfigurationParserTest {
     private static final String FILE = "/file.sudoku";
 
     @Test
-    public void testParseNullArgs() {
-        assertThrows(RequiredFileException.class, () -> ConfigurationParser.parse(null));
-    }
-
-    @Test
-    public void testParseEmptyArgs() {
-        assertThrows(RequiredFileException.class, () -> ConfigurationParser.parse(new String[0]));
+    public void testParseNoArgs() {
+        assertThrows(RequiredFileException.class, () -> ConfigurationParser.parse());
     }
 
     @Test
     public void testParseEmptyString() {
-        assertThrows(RequiredFileException.class, () -> ConfigurationParser.parse(new String[] {""}));
+        assertThrows(RequiredFileException.class, () -> ConfigurationParser.parse(""));
     }
 
     @Test
     public void testParseWithoutMultithreading() {
-        Configuration config = ConfigurationParser.parse(new String[] {FILE});
+        Configuration config = ConfigurationParser.parse(FILE);
         verifyResult(config, false);
     }
 
     @Test
     public void testParseWithoutMultithreadingValue() {
-        assertThrows(InvalidMulthreadingParameterException.class,
-                () -> ConfigurationParser.parse(new String[] {FILE, "-p"}));
+        assertThrows(InvalidMulthreadingParameterException.class, () -> ConfigurationParser.parse(FILE, "-p"));
     }
 
     @Test
     public void testParseWithMultithreadingValueInvalid() {
-        assertThrows(InvalidMulthreadingParameterException.class,
-                () -> ConfigurationParser.parse(new String[] {FILE, "-p", "a"}));
+        assertThrows(InvalidMulthreadingParameterException.class, () -> ConfigurationParser.parse(FILE, "-p", "a"));
     }
 
     @Test
     public void testParseWithMultithreadingFalse() {
-        Configuration config = ConfigurationParser.parse(new String[] {FILE, "-p", "0"});
+        Configuration config = ConfigurationParser.parse(FILE, "-p", "0");
         verifyResult(config, false);
     }
 
     @Test
     public void testParseWithMultithreadingTrue() {
-        Configuration config = ConfigurationParser.parse(new String[] {FILE, "-p", "1"});
+        Configuration config = ConfigurationParser.parse(FILE, "-p", "1");
         verifyResult(config, true);
     }
 

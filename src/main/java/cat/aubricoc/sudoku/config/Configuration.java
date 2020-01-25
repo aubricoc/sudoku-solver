@@ -8,7 +8,6 @@ public class Configuration {
     private final String file;
 
     public Configuration(boolean multithreading, String file) {
-        super();
         this.multithreading = multithreading;
         this.file = file;
     }
