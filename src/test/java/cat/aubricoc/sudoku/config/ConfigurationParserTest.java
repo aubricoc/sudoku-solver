@@ -3,7 +3,7 @@ package cat.aubricoc.sudoku.config;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import cat.aubricoc.sudoku.exception.InvalidMulthreadingParameter;
+import cat.aubricoc.sudoku.exception.InvalidMulthreadingParameterException;
 import cat.aubricoc.sudoku.exception.RequiredFileException;
 import org.junit.jupiter.api.Test;
 
@@ -34,13 +34,13 @@ public class ConfigurationParserTest {
 
     @Test
     public void testParseWithoutMultithreadingValue() {
-        assertThrows(InvalidMulthreadingParameter.class,
+        assertThrows(InvalidMulthreadingParameterException.class,
                 () -> ConfigurationParser.getInstance().parse(new String[] {FILE, "-p"}));
     }
 
     @Test
     public void testParseWithMultithreadingValueInvalid() {
-        assertThrows(InvalidMulthreadingParameter.class,
+        assertThrows(InvalidMulthreadingParameterException.class,
                 () -> ConfigurationParser.getInstance().parse(new String[] {FILE, "-p", "a"}));
     }
 

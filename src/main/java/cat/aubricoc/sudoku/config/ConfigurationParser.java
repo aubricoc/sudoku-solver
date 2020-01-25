@@ -1,6 +1,6 @@
 package cat.aubricoc.sudoku.config;
 
-import cat.aubricoc.sudoku.exception.InvalidMulthreadingParameter;
+import cat.aubricoc.sudoku.exception.InvalidMulthreadingParameterException;
 import cat.aubricoc.sudoku.exception.RequiredFileException;
 
 public class ConfigurationParser {
@@ -47,6 +47,6 @@ public class ConfigurationParser {
                 return false;
             }
         }
-        throw new InvalidMulthreadingParameter();
+        throw new InvalidMulthreadingParameterException();
     }
 }

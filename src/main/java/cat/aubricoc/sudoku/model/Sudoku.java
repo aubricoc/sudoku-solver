@@ -35,9 +35,7 @@ public class Sudoku {
 
     @Override
     public String toString() {
-        return cells.stream().map(row -> row.stream().map(cell -> {
-            Short value = cell.getValue();
-            return value == null ? "x" : value.toString();
-        }).collect(Collectors.joining(","))).collect(Collectors.joining(System.lineSeparator()));
+        return cells.stream().map(row -> row.stream().map(Object::toString).collect(Collectors.joining(",")))
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }
