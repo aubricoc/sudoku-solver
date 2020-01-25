@@ -5,6 +5,7 @@ import cat.aubricoc.sudoku.model.Position;
 import cat.aubricoc.sudoku.model.Sudoku;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class SudokuService {
 
@@ -57,5 +58,12 @@ public class SudokuService {
 
     private boolean isValidPositionNumber(short position) {
         return position > -1 && position < 9;
+    }
+
+    public List<Short> getPossibleValuesInCell(Sudoku sudoku, Cell cell) {
+        return IntStream.range(1, 10).mapToObj(value -> (short) value).filter(value -> {
+            cell.setValue((short) value);
+            return SudokuValidator.getInstance().validateSudoku(sudoku);
+        }).collect(Collectors.toList());
     }
 }

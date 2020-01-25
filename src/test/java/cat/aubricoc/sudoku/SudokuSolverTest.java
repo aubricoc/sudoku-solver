@@ -24,23 +24,44 @@ public class SudokuSolverTest {
     }
 
     @Test
+    public void testSolveSudokuWithoutSolutionMultithreading() {
+        Sudoku sudoku = TestUtils.getSudoku("sudokuNoSolution");
+        assertThrows(UnresolvableSudokuException.class, () -> SudokuSolver.getInstance().solve(sudoku, true));
+    }
+
+    @Test
     public void testSolveSudoku1() {
-        testSolveSudoku("sudoku1");
+        testSolveSudoku("sudoku1", false);
     }
 
     @Test
     public void testSolveSudoku2() {
-        testSolveSudoku("sudoku2");
+        testSolveSudoku("sudoku2", false);
     }
 
     @Test
     public void testSolveSudokuEmpty() {
-        testSolveSudoku("sudokuEmpty");
+        testSolveSudoku("sudokuEmpty", false);
     }
 
-    private void testSolveSudoku(String fileName) {
+    @Test
+    public void testSolveSudoku1Multithreading() {
+        testSolveSudoku("sudoku1", true);
+    }
+
+    @Test
+    public void testSolveSudoku2Multithreading() {
+        testSolveSudoku("sudoku2", true);
+    }
+
+    @Test
+    public void testSolveSudokuEmptyMultithreading() {
+        testSolveSudoku("sudokuEmpty", true);
+    }
+
+    private void testSolveSudoku(String fileName, boolean multithreading) {
         Sudoku sudoku = TestUtils.getSudoku(fileName);
-        Sudoku solved = SudokuSolver.getInstance().solve(sudoku, false);
+        Sudoku solved = SudokuSolver.getInstance().solve(sudoku, multithreading);
         Sudoku solution = TestUtils.getSudoku(fileName + ".solved");
         assertEquals(solution, solved);
     }

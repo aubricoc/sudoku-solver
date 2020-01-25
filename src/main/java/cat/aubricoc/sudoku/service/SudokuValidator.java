@@ -28,7 +28,7 @@ public class SudokuValidator {
                 && sudoku.getSquares().stream().allMatch(this::validateGroupOfCells);
     }
 
-    public boolean validateGroupOfCells(List<Cell> cells) {
+    private boolean validateGroupOfCells(List<Cell> cells) {
         Set<Short> values = new HashSet<>();
         return cells.stream().map(Cell::getValue).filter(Objects::nonNull).allMatch(value -> {
             if (values.contains(value)) {
