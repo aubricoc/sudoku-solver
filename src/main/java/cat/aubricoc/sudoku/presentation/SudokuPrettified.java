@@ -4,7 +4,7 @@ import cat.aubricoc.sudoku.model.Cell;
 import cat.aubricoc.sudoku.model.Sudoku;
 import java.util.List;
 
-public class GoodLookingSudoku {
+public class SudokuPrettified {
 
     private static final String LINE = "+ · · · · · · · · · · · + · · · · · · · · · · · + · · · · · · · · · · · +";
     private static final String LINE_BOLD = "+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +";
@@ -12,7 +12,7 @@ public class GoodLookingSudoku {
 
     private final Sudoku sudoku;
 
-    public GoodLookingSudoku(Sudoku sudoku) {
+    public SudokuPrettified(Sudoku sudoku) {
         this.sudoku = sudoku;
     }
 
